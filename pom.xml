@@ -8,6 +8,8 @@
         <module>pos-carts</module>
         <module>pos-discovery</module>
         <module>pos-gateway</module>
+        <module>pos-order</module>
+        <module>pos-delivery</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -39,7 +41,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>3.1.1</version>
+            <version>3.1.3</version>
         </dependency>
     </dependencies>
 

@@ -1,14 +1,16 @@
 package com.micropos.carts.rest;
 
+import com.micropos.carts.dto.OrderDto;
 import com.micropos.carts.api.CartApi;
 import com.micropos.carts.dto.ItemDto;
 import com.micropos.carts.model.Cart;
 import com.micropos.carts.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,14 @@ public class CartsController implements CartApi {
     Cart cart;
     CartService cartService;
 
+    @LoadBalanced
+    RestTemplate restTemplate;
+
+    @Autowired
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Autowired
     public void setCart(Cart cart) {
         this.cart = cart;
@@ -27,6 +37,16 @@ public class CartsController implements CartApi {
     @Autowired
     public void setCartService(CartService cartService) {
         this.cartService = cartService;
+    }
+
+    @Override
+    public ResponseEntity<OrderDto> checkOutCart() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Cart> entity = new HttpEntity<>(cart, headers);
+        Object o = restTemplate.postForObject("http://order-service/api/order/new", entity, Object.class);
+        // todo: error
+        return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
     }
 
     @Override
