@@ -1,9 +1,11 @@
 package com.micropos.products.rest;
 
-import com.micropos.products.api.ProductsApi;
-import com.micropos.products.dto.ProductDto;
-import com.micropos.products.mapper.ProductMapper;
+import com.micropos.api.ProductsApi;
+import com.micropos.dto.ProductDto;
+import com.micropos.mapper.ProductMapper;
 import com.micropos.products.service.ProductService;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +23,13 @@ public class ProductController implements ProductsApi {
     private final ProductService productService;
 
 
-    public ProductController(ProductService productService, ProductMapper productMapper) {
-        this.productMapper = productMapper;
+    public ProductController(@Autowired ProductService productService) {
+        this.productMapper = Mappers.getMapper(ProductMapper.class);
         this.productService = productService;
     }
 
     @Override
-    public ResponseEntity<List<ProductDto>> listProducts(){
+    public ResponseEntity<List<ProductDto>> listProducts() {
         List<ProductDto> products = new ArrayList<>(productMapper.toProductsDto(this.productService.products()));
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

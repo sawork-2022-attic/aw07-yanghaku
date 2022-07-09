@@ -1,6 +1,6 @@
 package com.micropos.delivery;
 
-import com.micropos.order.model.Order;
+import com.micropos.model.Order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

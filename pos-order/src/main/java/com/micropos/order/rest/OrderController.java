@@ -1,14 +1,14 @@
 package com.micropos.order.rest;
 
-import com.micropos.order.mapper.ItemMapper;
-import com.micropos.order.model.Cart;
-import com.micropos.order.model.Item;
-import com.micropos.order.api.OrderApi;
-import com.micropos.order.dto.ItemDto;
-import com.micropos.order.dto.OrderDto;
-import com.micropos.order.mapper.OrderMapper;
-import com.micropos.order.model.Order;
+import com.micropos.mapper.ItemMapper;
+import com.micropos.model.Item;
+import com.micropos.api.OrderApi;
+import com.micropos.dto.ItemDto;
+import com.micropos.dto.OrderDto;
+import com.micropos.mapper.OrderMapper;
+import com.micropos.model.Order;
 import com.micropos.order.service.OrderService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,30 +24,18 @@ public class OrderController implements OrderApi {
 
     OrderService orderService;
 
-    OrderMapper orderMapper;
+    OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 
-    ItemMapper itemMapper;
+    ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
 
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
     }
 
-    @Autowired
-    public void setOrderMapper(OrderMapper orderMapper) {
-        this.orderMapper = orderMapper;
-    }
-
-    @Autowired
-    public void setItemMapper(ItemMapper itemMapper) {
-        this.itemMapper = itemMapper;
-    }
-
     @Override
     public ResponseEntity<OrderDto> addOrder(List<ItemDto> items) {
-        Cart cart = new Cart();
-        cart.setItems((List<Item>) itemMapper.toCart(items));
-        Order order = orderService.addOrder(cart);
+        Order order = orderService.addOrder((List<Item>) itemMapper.toCart(items));
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {

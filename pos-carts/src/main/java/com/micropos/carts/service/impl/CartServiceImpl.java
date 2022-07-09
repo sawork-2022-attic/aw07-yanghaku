@@ -1,23 +1,18 @@
 package com.micropos.carts.service.impl;
 
-import com.micropos.carts.dto.ItemDto;
-import com.micropos.carts.mapper.CartsMapper;
+import com.micropos.dto.ItemDto;
+import com.micropos.mapper.CartsMapper;
 import com.micropos.carts.model.Cart;
-import com.micropos.carts.model.Item;
+import com.micropos.model.Item;
 import com.micropos.carts.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
 public class CartServiceImpl implements CartService {
-    private CartsMapper cartsMapper;
-
-    @Autowired
-    public void setCartsMapper(CartsMapper cartsMapper) {
-        this.cartsMapper = cartsMapper;
-    }
+    private final CartsMapper cartsMapper = Mappers.getMapper(CartsMapper.class);
 
     @Override
     public boolean deleteProductInCart(Cart cart, String productId) {

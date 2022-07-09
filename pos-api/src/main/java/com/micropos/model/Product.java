@@ -1,4 +1,4 @@
-package com.micropos.products.model;
+package com.micropos.model;
 
 import java.io.Serializable;
 
@@ -45,5 +45,10 @@ public class Product implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", price=" + price + ", image='" + image + '\'' + '}';
     }
 }

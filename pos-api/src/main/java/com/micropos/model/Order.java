@@ -1,4 +1,4 @@
-package com.micropos.order.model;
+package com.micropos.model;
 
 import java.io.Serializable;
 import java.util.List;

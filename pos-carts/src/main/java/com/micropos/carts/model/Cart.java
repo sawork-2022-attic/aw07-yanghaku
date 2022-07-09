@@ -1,5 +1,6 @@
 package com.micropos.carts.model;
 
+import com.micropos.model.Item;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 

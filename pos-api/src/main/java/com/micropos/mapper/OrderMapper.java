@@ -1,7 +1,7 @@
-package com.micropos.order.mapper;
+package com.micropos.mapper;
 
-import com.micropos.order.dto.OrderDto;
-import com.micropos.order.model.Order;
+import com.micropos.dto.OrderDto;
+import com.micropos.model.Order;
 import org.mapstruct.Mapper;
 
 import java.util.Collection;

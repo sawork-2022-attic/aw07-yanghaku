@@ -1,8 +1,6 @@
 package com.micropos.order.repository;
 
-import com.micropos.order.model.Order;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.micropos.model.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

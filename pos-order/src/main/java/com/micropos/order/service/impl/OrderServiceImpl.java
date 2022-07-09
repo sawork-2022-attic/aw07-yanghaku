@@ -1,7 +1,7 @@
 package com.micropos.order.service.impl;
 
-import com.micropos.order.model.Cart;
-import com.micropos.order.model.Order;
+import com.micropos.model.Item;
+import com.micropos.model.Order;
 import com.micropos.order.repository.OrderRepository;
 import com.micropos.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder(Cart cart) {
+    public Order addOrder(List<Item> items) {
         Order order = new Order();
-        order.setItems(cart.getItems());
+        order.setItems(items);
         orderRepository.addOrder(order);
         return order;
     }

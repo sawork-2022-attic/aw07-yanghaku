@@ -1,7 +1,7 @@
-package com.micropos.order.mapper;
+package com.micropos.mapper;
 
-import com.micropos.order.dto.ItemDto;
-import com.micropos.order.model.Item;
+import com.micropos.dto.ItemDto;
+import com.micropos.model.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

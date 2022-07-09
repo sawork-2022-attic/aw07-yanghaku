@@ -1,10 +1,11 @@
 package com.micropos.carts.rest;
 
-import com.micropos.carts.dto.OrderDto;
-import com.micropos.carts.api.CartApi;
-import com.micropos.carts.dto.ItemDto;
+import com.micropos.dto.OrderDto;
+import com.micropos.api.CartApi;
+import com.micropos.dto.ItemDto;
 import com.micropos.carts.model.Cart;
 import com.micropos.carts.service.CartService;
+import com.micropos.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
@@ -43,10 +44,8 @@ public class CartsController implements CartApi {
     public ResponseEntity<OrderDto> checkOutCart() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Cart> entity = new HttpEntity<>(cart, headers);
-        Object o = restTemplate.postForObject("http://order-service/api/order/new", entity, Object.class);
-        // todo: error
-        return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        HttpEntity<List<Item>> entity = new HttpEntity<>(cart.getItems(), headers);
+        return restTemplate.postForEntity("http://pos-order/api/order/new", entity, OrderDto.class);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.micropos.delivery;
 
-import com.micropos.order.model.Order;
+import com.micropos.model.Order;
 
 import java.util.function.Consumer;
 

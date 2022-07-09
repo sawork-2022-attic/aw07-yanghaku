@@ -1,6 +1,6 @@
 package com.micropos.carts.service;
 
-import com.micropos.carts.dto.ItemDto;
+import com.micropos.dto.ItemDto;
 import com.micropos.carts.model.Cart;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.micropos.carts.model;
+package com.micropos.model;
 
 import java.io.Serializable;
 
@@ -21,5 +21,10 @@ public class Item implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" + "productId='" + productId + '\'' + ", quantity=" + quantity + '}';
     }
 }
